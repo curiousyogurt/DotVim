@@ -1,0 +1,138 @@
+extends tex
+
+snippet ket "Ket"
+$|$1\rangle$
+endsnippet
+
+snippet qs0 "Quantum State 0"
+$|0\rangle$
+endsnippet
+
+snippet qs1 "Quantum State 1"
+$|1\rangle$
+endsnippet
+
+snippet qs0- "Quantum State 0-"
+$|\overline{0}\rangle$
+endsnippet
+
+snippet qs1- "Quantum State 1-"
+$|\overline{1}\rangle$
+endsnippet
+
+snippet q++ "Quantum State ++"
+$|^{+}_{+}\rangle$
+endsnippet
+
+snippet q+- "Quantum State +-"
+$|^{+}_{-}\rangle$
+endsnippet
+
+snippet q-- "Quantum State --"
+$|^{-}_{-}\rangle$
+endsnippet
+
+snippet q-+ "Quantum State -+"
+$|^{-}_{+}\rangle$
+endsnippet
+
+snippet qr "Qubit Rotated"
+$1\textdegree~counterclockwise from $|0\rangle$
+endsnippet
+
+snippet hb "Horizontal Bmatrix"
+$\begin{bmatrix} 1~0 \end{bmatrix}
+endsnippet
+
+snippet H "Hadamard Transform"
+$\frac{1}{\sqrt{2}}$
+endsnippet
+
+snippet sm "Small Matrix Transposed"
+$[\begin{smallmatrix}$1~$2\end{smallmatrix}]^{\scriptscriptstyle\top}$$0
+endsnippet
+
+snippet " "LaTeX Quotes" A
+\`\`${1}''${0}
+endsnippet
+
+snippet da "Deutsch's Algorithm"
+Deutsch's Algorithm
+endsnippet
+
+snippet dja "Deutsch-Josza Algorithm"
+Deusch-Josza Algorithm
+endsnippet
+
+snippet h "Halting Program"
+\emph{H}
+endsnippet
+
+snippet r "Reverse Halting Program"
+\emph{R}
+endsnippet
+
+snippet d1 "Dingbat 1"
+\ding{192}
+endsnippet
+
+snippet d2 "Dingbat 2"
+\ding{193}
+endsnippet
+
+snippet d3 "Dingbat 3"
+\ding{194}
+endsnippet
+
+snippet mbb "Mathbb"
+$\mathbb{$1}$
+endsnippet
+
+snippet mbbc "Mathbb Cardinality"
+$|\mathbb{$1}|$
+endsnippet
+
+snippet mini "Minipage Figure"
+\begin{figure}
+  \begin{minipage}{\textwidth}
+    \begin{center}
+      \includegraphics[width=0.85\textwidth,keepaspectratio]{Figures/$1}
+      \caption{$2}
+    \end{center}
+  \end{minipage}
+  \label{fig:$1}
+\end{figure}
+endsnippet
+
+snippet lst "Inline code listing"
+\lstinline[columns=fixed]{${1}}
+endsnippet
+
+snippet new "New TeX Document"
+%======================================================================================
+%================ Preamble ============================================================
+%======================================================================================
+\documentclass[11pt,oneside,article]{memoir}            % Good copy
+%======================================================================================
+%================ Packages ============================================================
+%======================================================================================
+\usepackage[utf8]{inputenc}                             % UTF-8 (non ascii) encoding
+\usepackage[T1]{fontenc}                                % Latin Modern font
+\usepackage{lmodern}                                    % Latin Modern font
+\usepackage[activate={true,nocompatibility},final,      % Margin kerning
+            tracking=true,kerning=true,spacing=true,
+            factor=1100,stretch=10,shrink=10,
+            protrusion=true]{microtype}
+%======================================================================================
+\begin{document}
+%======================================================================================
+%============= Other Settings =========================================================
+%======================================================================================
+\pagestyle{myheadings}
+%======================================================================================
+
+$0
+
+
+\end{document}
+endsnippet
