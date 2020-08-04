@@ -49,10 +49,12 @@ call minpac#add('guns/vim-sexp')
 call minpac#add('tpope/vim-surround')
 call minpac#add('w0rp/ale')
 call minpac#add('liquidz/vim-iced')
+call minpac#add('eraserhd/parinfer-rust')               " Parinfer
 
 " Enable vim-iced's default key mapping
 " This is recommended for newbies
 let g:iced_enable_default_key_mappings = v:true
+"let g:sexp_insert_after_wrap = v:false
 
 " Easy utility commands for minpac
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
@@ -129,6 +131,7 @@ let g:notes_directories = ['~/Documents/Notes'] " Notes: directory
 let g:UltiSnipsEditSplit='vertical'             " Ultisnips:  Split vertically on :UltiSnipsEdit
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/pack/minpac/start/ultisnips',$HOME.'/.vim/snips'] " Where to look for snippets (may be a list)
 let g:ale_linters_explicit = 1                  " Only turn on ALE if we have a linter by filetype
+let g:tex_flavor = 'latex'                      " Default tex flavour for vimtex
 
 " Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -136,7 +139,7 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Turn off rainbow parentheses, except when explicitly turned on
-let g:rainbow_active = 0
+let g:rainbow_active = 1
 
 " --------------------------------------------------
 " Folding:
@@ -158,7 +161,7 @@ set foldlevelstart=10                           " Open most folds to start
 " Fix syntax highlighting (when vim loses track): 8
 " Fix the last spelling error wth c-f (in insert mode): 9
 " Fix the last spelling error wth c-f (in normal mode): 10
-" Toggle on/off raindow parentheses: 11
+" Toggle on/off rainbow parentheses: 11
 " Write a file: 12
 " Write a file and quit: 13
 " Start fzf: 14
@@ -178,6 +181,7 @@ nnoremap <leader>rp      :RainbowToggle<CR>
 nnoremap <leader>w       :w<CR>
 nnoremap <leader>wq      :wq!<CR>
 nnoremap <C-p>           :<C-u>FZF<CR>
+
 
 " Explanation for <c-f>:
 " <c-g>u : sets undo break
@@ -228,12 +232,13 @@ augroup FileTypeConfiguration
   autocmd FileType tex nnoremap <leader>wc! :VimtexCountWords!<CR> " Detailed wordcount for LaTeX
 
   " Clojure files
-  autocmd FileType clojure RainbowToggleOn
-" \ 'clojure': ['clj-kondo', 'joker']
-  autocmd FileType clojure let g:ale_linters = {
-      \ 'clojure': ['clj-kondo']
-      \}
+  "\ 'clojure': ['clj-kondo', 'joker']
+  autocmd FileType clojure let g:ale_linters = {'clojure': ['clj-kondo']}
   autocmd FileType clojure ALEEnable
+  " Release ,w mapping and set round_head/tail_wrap_element to e/E
+  autocmd FileType clojure let g:sexp_mappings = {'sexp_round_head_wrap_element': '<leader>e',
+                                                \ 'sexp_round_tail_wrap_element': '<leader>E'}
+  autocmd FileType clojure let g:sexp_enable_insert_mode_mappings = 0
 
 augroup END
 
