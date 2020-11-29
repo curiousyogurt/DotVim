@@ -1,5 +1,5 @@
 packadd minpac
-call minpac#init()
+call minpac#init({'progress_open': 'vertical'})
 
 " --------------------------------------------------
 " Plugins Via Minpac:
@@ -57,7 +57,8 @@ let g:iced_enable_default_key_mappings = v:true
 "let g:sexp_insert_after_wrap = v:false
 
 " Easy utility commands for minpac
-command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
+"command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': {->minpac#status({'open': 'vertical'})}})
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
 
@@ -141,6 +142,17 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " Turn off rainbow parentheses, except when explicitly turned on
 let g:rainbow_active = 1
 
+" Instruct rainbow parentheses to spellcheck in tex within parentheses
+let g:rainbow_conf = {
+\	'separately': {
+\		'*': {},
+\		'tex': {
+\			'parentheses_options': 'contains=@NoSpell',
+\		},
+\	},
+\}
+
+
 " --------------------------------------------------
 " Folding:
 " --------------------------------------------------
@@ -165,6 +177,7 @@ set foldlevelstart=10                           " Open most folds to start
 " Write a file: 12
 " Write a file and quit: 13
 " Start fzf: 14
+" PackUpdate: 15
 
 nnoremap <leader>sc      :noh<CR>
 nnoremap <leader>rn      :RecentNotes<CR>
@@ -181,6 +194,7 @@ nnoremap <leader>rp      :RainbowToggle<CR>
 nnoremap <leader>w       :w<CR>
 nnoremap <leader>wq      :wq!<CR>
 nnoremap <C-p>           :<C-u>FZF<CR>
+nnoremap <leader>pu      :PackUpdate<CR>
 
 
 " Explanation for <c-f>:
@@ -227,7 +241,6 @@ augroup FileTypeConfiguration
   " LaTeX files
   autocmd FileType tex call Text()
   autocmd FileType tex set conceallevel=0
-  autocmd FileType tex RainbowToggleOn
   autocmd FileType tex nnoremap <leader>wc :VimtexCountWords<CR>  " Wordcount for LaTeX
   autocmd FileType tex nnoremap <leader>wc! :VimtexCountWords!<CR> " Detailed wordcount for LaTeX
 
